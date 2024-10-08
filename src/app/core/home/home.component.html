@@ -1,16 +1,20 @@
-<div class="container my-5">
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 col-sm-12">
       <div class="shopping-list-container p-4">
         <h1 class="text-center mb-4 display-5 text-primary">Minha Lista de Compras</h1>
+
+        <div *ngIf="mensagem" class="alert alert-info" role="alert">
+          {{ mensagem }}
+        </div>
 
         <app-add-lista-itens (itemAdicionado)="adicionarItem($event)"></app-add-lista-itens>
 
         <app-listar-compras
           [itens]="itensNaoComprados"
           (itemComprado)="marcarComoComprado($event)"
-          (itemDeletado)="removerItem($event)"
-        ></app-listar-compras>
+          (itemDeletado)="removerItem($event)">
+        </app-listar-compras>
 
         <app-itens-comprados [comprados]="itensComprados"></app-itens-comprados>
       </div>

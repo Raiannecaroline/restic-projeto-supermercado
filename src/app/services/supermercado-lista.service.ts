@@ -6,31 +6,60 @@ import { SupermercadoItens } from '../models/supermercado-itens.model';
 })
 export class SupermercadoListaService {
 
-  private itens: SupermercadoItens[] = [];
+  private readonly storageKey = 'listaSupermercado';
+  mensagem: string | null = null;
 
-  constructor() {}
-
-  getItems(): SupermercadoItens[] {
-    return this.itens;
+  constructor() {
+    this.initStorage();
   }
 
-  addItem(nome: string): void {
-    const novoItem: SupermercadoItens = {
-      id: Date.now(),
-      nome: nome,
-      comprado: false
-    };
-    this.itens.push(novoItem);
-  }
-
-  alterarCompra(id: number): void {
-    const item = this.itens.find(item => item.id === id);
-    if (item) {
-      item.comprado = !item.comprado;
+  private initStorage() {
+    if (!this.getItems()) {
+      this.saveItems([]);
     }
   }
 
-  deletarItem(id: number): void {
-    this.itens = this.itens.filter(item => item.id !== id);
+  getItems(): SupermercadoItens[] {
+    const items = localStorage.getItem(this.storageKey);
+    return items ? JSON.parse(items) : [];
+  }
+
+  saveItems(itens: SupermercadoItens[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(itens));
+  }
+
+  addItem(nome: string) {
+    const itens = this.getItems();
+    const itemExistente = itens.find(item => item.nome.toLowerCase() === nome.toLowerCase());
+
+    if (!itemExistente) {
+      const novoItem: SupermercadoItens = { id: Date.now(), nome, comprado: false };
+      itens.push(novoItem);
+      this.saveItems(itens);
+    } else {
+      this.mensagem = `O Item "${nome}" já está na lista!`;
+      this.limparMensagem();
+    }
+  }
+
+  alterarCompra(id: number) {
+    const itens = this.getItems();
+    const item = itens.find((item) => item.id === id);
+    if (item) {
+      item.comprado = !item.comprado;
+      this.saveItems(itens);
+    }
+  }
+
+  deletarItem(id: number) {
+    let itens = this.getItems();
+    itens = itens.filter((item) => item.id !== id);
+    this.saveItems(itens);
+  }
+
+  private limparMensagem() {
+    setTimeout(() => {
+      this.mensagem = null;
+    }, 3000);
   }
 }
