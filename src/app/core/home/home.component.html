@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Lista de Compras</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Componente de Adicionar Itens -->
+      <app-add-lista-itens (itemAdicionado)="addItem($event)"></app-add-lista-itens>
+
+      <!-- Componente de Lista de Compras -->
+      <app-listar-compras
+      [itens]="itens" (togglePurchased)="alterarCompras($event)" (deleteItem)="deletarItem($event)"></app-listar-compras>
+    </div>
+  </div>
+</div>
