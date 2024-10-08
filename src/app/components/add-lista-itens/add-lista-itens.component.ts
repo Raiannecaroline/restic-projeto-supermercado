@@ -8,19 +8,13 @@ import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 })
 export class AddListaItensComponent {
 
+  @Output() itemAdicionado = new EventEmitter<string>();
   nomeItem: string = '';
-
-  @Output() itemAdicionado = new EventEmitter<SupermercadoItens>();
 
   adicionarItem() {
     if (this.nomeItem.trim()) {
-      const novoItem: SupermercadoItens = {
-        id: Date.now(),
-        nome: this.nomeItem,
-        comprado: false
-      };
-      this.itemAdicionado.emit(novoItem);
-      this.nomeItem = '';
+      this.itemAdicionado.emit(this.nomeItem.trim());
+      this.nomeItem = ''; // Limpa o input após adicionar
     }
   }
 

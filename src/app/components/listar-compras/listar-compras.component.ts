@@ -10,15 +10,15 @@ import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 export class ListarComprasComponent {
 
   @Input() itens: SupermercadoItens[] = [];
-  @Output() togglePurchased = new EventEmitter<number>();
-  @Output() deleteItem = new EventEmitter<number>();
+  @Output() itemComprado = new EventEmitter<number>();
+  @Output() itemDeletado = new EventEmitter<number>();
 
-  alterarCompra(id: number) {
-    this.togglePurchased.emit(id);
+  marcarComoComprado(id: number) {
+    this.itemComprado.emit(id);
   }
 
   deletarItem(id: number) {
-    this.deleteItem.emit(id);
+    this.itemDeletado.emit(id);
   }
 
 }

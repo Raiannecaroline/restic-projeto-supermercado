@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
+import { SupermercadoListaService } from 'src/app/services/supermercado-lista.service';
 
 @Component({
   selector: 'app-itens-comprados',
@@ -8,10 +9,14 @@ import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 })
 export class ItensCompradosComponent {
 
-  @Input() itens: SupermercadoItens[] = [];
+  @Input() comprados: SupermercadoItens[] = [];
 
-  get comprados() {
-    return this.itens.filter(item => item.comprado);
+  constructor(
+    private supermercadoListaService: SupermercadoListaService
+  ) {}
+
+  removerItem(id: number) {
+    this.supermercadoListaService.deletarItem(id);
   }
 
 }

@@ -9,25 +9,31 @@ import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 })
 export class HomeComponent {
 
-  itens: SupermercadoItens[] = [];
+  itensNaoComprados: SupermercadoItens[] = [];
+  itensComprados: SupermercadoItens[] = [];
 
   constructor(private supermercadoListaService: SupermercadoListaService) {
-    this.itens = this.supermercadoListaService.getItems();
+    this.atualizarItens();
   }
 
-  addItem(item: SupermercadoItens) {
-    this.supermercadoListaService.addItem(item.nome);
-    this.itens = this.supermercadoListaService.getItems();
+  adicionarItem(nome: string) {
+    this.supermercadoListaService.addItem(nome);
+    this.atualizarItens();
   }
 
-  togglePurchased(id: number) {
+  marcarComoComprado(id: number) {
     this.supermercadoListaService.alterarCompra(id);
-    this.itens = this.supermercadoListaService.getItems();
+    this.atualizarItens();
   }
 
-  deleteItem(id: number) {
+  removerItem(id: number) {
     this.supermercadoListaService.deletarItem(id);
-    this.itens = this.supermercadoListaService.getItems();
+    this.atualizarItens();
   }
 
+  atualizarItens() {
+    const todosItens = this.supermercadoListaService.getItems();
+    this.itensNaoComprados = todosItens.filter(item => !item.comprado);
+    this.itensComprados = todosItens.filter(item => item.comprado);
+  }
 }

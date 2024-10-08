@@ -4,13 +4,15 @@
       <div class="shopping-list-container p-4">
         <h1 class="text-center mb-4 display-5 text-primary">Minha Lista de Compras</h1>
 
-        <app-add-lista-itens (itemAdicionado)="addItem($event)"></app-add-lista-itens>
+        <app-add-lista-itens (itemAdicionado)="adicionarItem($event)"></app-add-lista-itens>
 
         <app-listar-compras
-          [itens]="itens"
-          (togglePurchased)="togglePurchased($event)"
-          (deleteItem)="deleteItem($event)"
+          [itens]="itensNaoComprados"
+          (itemComprado)="marcarComoComprado($event)"
+          (itemDeletado)="removerItem($event)"
         ></app-listar-compras>
+
+        <app-itens-comprados [comprados]="itensComprados"></app-itens-comprados>
       </div>
     </div>
   </div>
