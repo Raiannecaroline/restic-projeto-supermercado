@@ -1,5 +1,5 @@
 <div *ngIf="itens.length > 0">
-  <h3>Itens da Lista de Compras</h3>
+  <h3>Itens da Lista</h3>
   <ul class="list-group">
     <li *ngFor="let item of itens" class="list-group-item d-flex justify-content-between">
       <span [class.text-muted]="item.comprado" [style.text-decoration]="item.comprado ? 'line-through' : 'none'">

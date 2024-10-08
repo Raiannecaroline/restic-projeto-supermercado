@@ -1,19 +1,19 @@
-<div class="input-group mb-3">
+<div class="input-group mb-3 shadow-sm">
   <input
     type="text"
-    class="form-control"
+    class="form-control form-control-lg rounded-start"
     [(ngModel)]="nomeItem"
-    placeholder="Adicione um item"
+    placeholder="Digite o nome do item"
     aria-label="Nome do item"
     aria-describedby="button-addon2"
     required
   />
   <button
-    class="btn btn-outline-secondary"
+    class="btn btn-outline-primary btn-lg rounded-end"
     (click)="adicionarItem()"
     id="button-addon2"
     [disabled]="!nomeItem.trim()"
   >
-    Adicionar
+    Adicionar <i class="bi bi-plus-circle"></i>
   </button>
 </div>
