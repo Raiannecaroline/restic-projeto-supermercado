@@ -56,7 +56,7 @@ export class HomeComponent {
     this.itensComprados = todosItens.filter((item) => item.comprado);
   }
 
-  // Função menagens
+  // Função mensagens
   private limparMensagem() {
     setTimeout(() => {
       this.mensagem = null;
