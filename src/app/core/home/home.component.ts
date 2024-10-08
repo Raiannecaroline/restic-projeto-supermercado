@@ -15,17 +15,17 @@ export class HomeComponent {
     this.itens = this.supermercadoListaService.getItems();
   }
 
-  addItem(nome: string) {
-    this.supermercadoListaService.addItem(nome);
+  addItem(item: SupermercadoItens) {
+    this.supermercadoListaService.addItem(item.nome);
     this.itens = this.supermercadoListaService.getItems();
   }
 
-  alterarCompras(id: number) {
+  togglePurchased(id: number) {
     this.supermercadoListaService.alterarCompra(id);
     this.itens = this.supermercadoListaService.getItems();
   }
 
-  deletarItem(id: number) {
+  deleteItem(id: number) {
     this.supermercadoListaService.deletarItem(id);
     this.itens = this.supermercadoListaService.getItems();
   }

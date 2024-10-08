@@ -1,4 +1,19 @@
 <div class="input-group mb-3">
-  <input type="text" class="form-control" [(ngModel)]="novoItemNome" placeholder="Adicionar item..." />
-  <button class="btn btn-success" (click)="addItem()">Adicionar</button>
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="nomeItem"
+    placeholder="Adicione um item"
+    aria-label="Nome do item"
+    aria-describedby="button-addon2"
+    required
+  />
+  <button
+    class="btn btn-outline-secondary"
+    (click)="adicionarItem()"
+    id="button-addon2"
+    [disabled]="!nomeItem.trim()"
+  >
+    Adicionar
+  </button>
 </div>

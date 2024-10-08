@@ -9,35 +9,16 @@ import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 
 export class ListarComprasComponent {
 
-  itens: SupermercadoItens[] = []; // Sua lista de itens
-  temItensNaoComprados: boolean = false;
-  temItensComprados: boolean = false;
-
-  constructor() {
-    // Inicialize seus itens aqui
-    this.itens = [
-      { id: 1, nome: 'Maçã', comprado: false },
-      { id: 2, nome: 'Banana', comprado: true }
-    ];
-    this.verificarItens();
-  }
-
-  verificarItens() {
-    this.temItensNaoComprados = this.itens.some(item => !item.comprado);
-    this.temItensComprados = this.itens.some(item => item.comprado);
-  }
+  @Input() itens: SupermercadoItens[] = [];
+  @Output() togglePurchased = new EventEmitter<number>();
+  @Output() deleteItem = new EventEmitter<number>();
 
   alterarCompra(id: number) {
-    const item = this.itens.find(item => item.id === id);
-    if (item) {
-      item.comprado = !item.comprado; // Alterna o estado de comprado
-      this.verificarItens(); // Recalcula os itens após a alteração
-    }
+    this.togglePurchased.emit(id);
   }
 
   deletarItem(id: number) {
-    this.itens = this.itens.filter(item => item.id !== id);
-    this.verificarItens(); // Recalcula os itens após a exclusão
+    this.deleteItem.emit(id);
   }
 
 }

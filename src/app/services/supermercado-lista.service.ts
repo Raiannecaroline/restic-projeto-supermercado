@@ -6,23 +6,25 @@ import { SupermercadoItens } from '../models/supermercado-itens.model';
 })
 export class SupermercadoListaService {
 
-  private itens: SupermercadoItens[] = [
-    new SupermercadoItens(1, 'Maçã'),
-    new SupermercadoItens(2, 'Leite', true),
-    new SupermercadoItens(3, 'Pão')
-  ];
+  private itens: SupermercadoItens[] = [];
+
+  constructor() {}
 
   getItems(): SupermercadoItens[] {
     return this.itens;
   }
 
   addItem(nome: string): void {
-    const novoItem = new SupermercadoItens(this.itens.length + 1, nome);
+    const novoItem: SupermercadoItens = {
+      id: Date.now(),
+      nome: nome,
+      comprado: false
+    };
     this.itens.push(novoItem);
   }
 
   alterarCompra(id: number): void {
-    const item = this.itens.find(i => i.id === id);
+    const item = this.itens.find(item => item.id === id);
     if (item) {
       item.comprado = !item.comprado;
     }
