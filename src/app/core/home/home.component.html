@@ -1,21 +1,26 @@
+<!--- Mostrar os componentes de cada e coloca-los em uma página só --->
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 col-sm-12">
       <div class="shopping-list-container p-4">
         <h1 class="text-center mb-4 display-5 text-primary">Minha Lista de Compras</h1>
 
+        <!--- Mensagens de alerta --->
         <div *ngIf="mensagem" class="alert alert-info" role="alert">
           {{ mensagem }}
         </div>
 
+        <!--- Componentes para adicionar os itens --->
         <app-add-lista-itens (itemAdicionado)="adicionarItem($event)"></app-add-lista-itens>
 
+        <!--- Componente para listar itens adicionados --->
         <app-listar-compras
           [itens]="itensNaoComprados"
           (itemComprado)="marcarComoComprado($event)"
           (itemDeletado)="removerItem($event)">
         </app-listar-compras>
 
+        <!--- Componente para listar itens já comprados --->
         <app-itens-comprados [comprados]="itensComprados"></app-itens-comprados>
       </div>
     </div>

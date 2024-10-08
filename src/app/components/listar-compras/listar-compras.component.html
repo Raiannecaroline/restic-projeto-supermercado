@@ -1,14 +1,18 @@
+<!--- Componente que lista os itens adicionados via campo input e que possui eventos (quais vou comentar) --->
 <div *ngIf="itens.length > 0">
   <h3>Itens da Lista</h3>
   <ul class="list-group">
+    <!--- Lista cada item adicionado --->
     <li *ngFor="let item of itens" class="list-group-item d-flex justify-content-between">
       <span [class.text-muted]="item.comprado" [style.text-decoration]="item.comprado ? 'line-through' : 'none'">
         {{ item.nome }}
       </span>
       <div>
+        <!--- Esse botão marca o item que foi comprado --->
         <button class="btn btn-sm btn-outline-primary" (click)="marcarComoComprado(item.id)">
           <i class="bi bi-check-circle"></i> {{ item.comprado ? 'Desmarcar' : 'Comprar' }}
         </button>
+        <!--- Esse botão exclui o item adicionado --->
         <button class="btn btn-sm btn-outline-danger" (click)="deletarItem(item.id)">
           <i class="bi bi-trash"></i> Excluir
         </button>
@@ -16,6 +20,7 @@
     </li>
   </ul>
 </div>
+<!--- Exibe mensagem caso não tenha itens na lista --->
 <div *ngIf="itens.length === 0" class="text-center mt-4">
   <p class="text-secondary">Não há itens na lista.</p>
 </div>

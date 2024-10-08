@@ -9,12 +9,14 @@ import { SupermercadoListaService } from 'src/app/services/supermercado-lista.se
 })
 export class ItensCompradosComponent {
 
+  // Input pega os elementos do componente pai e passa para o filho
   @Input() comprados: SupermercadoItens[] = [];
 
   constructor(
     private supermercadoListaService: SupermercadoListaService
   ) {}
 
+  // Remove o item ou tenta
   removerItem(id: number) {
     this.supermercadoListaService.deletarItem(id);
   }

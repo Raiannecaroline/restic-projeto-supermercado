@@ -9,14 +9,18 @@ import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 
 export class ListarComprasComponent {
 
+  // O decorator input serve para passar elementos do componente pai para o filho
   @Input() itens: SupermercadoItens[] = [];
+  // O decorator output serve para que o filho emita eventos do elemento pai
   @Output() itemComprado = new EventEmitter<number>();
   @Output() itemDeletado = new EventEmitter<number>();
 
+  // Marcou como comprado
   marcarComoComprado(id: number) {
     this.itemComprado.emit(id);
   }
 
+  // Deletou o item
   deletarItem(id: number) {
     this.itemDeletado.emit(id);
   }
