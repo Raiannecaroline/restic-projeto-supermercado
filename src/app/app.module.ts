@@ -12,6 +12,7 @@ import { provideAuth0 } from '@auth0/auth0-angular';
 import { provideRouter, Routes } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routing.module';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { routes } from './app.routing.module';
     HomeComponent,
     ListarComprasComponent,
     AddListaItensComponent,
-    ItensCompradosComponent
+    ItensCompradosComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
