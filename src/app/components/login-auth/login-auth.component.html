@@ -2,11 +2,15 @@
   <div class="container flex-column">
     <h1 class="display-6">Seja Bem-Vindo ao Supermercadinho RESTIC</h1>
     <div class="d-flex justify-content-center pt-4">
-      <button class="btn btn-secondary btn-lg" (click)="login()">
+      <button *ngIf="!isLoggedIn" class="btn btn-secondary btn-lg" (click)="login()">
         <i class="bi bi-box-arrow-in-right"></i> Login
+      </button>
+      <button *ngIf="isLoggedIn" class="btn btn-danger btn-lg" (click)="logout()">
+        <i class="bi bi-box-arrow-in-left"></i> Logout
       </button>
     </div>
     <div *ngIf="isLoggedIn" class="alert alert-success mt-4" role="alert">
+      Bem-vindo(a), {{ profile?.name || profile?.email }}!
       Login realizado com sucesso!
     </div>
   </div>

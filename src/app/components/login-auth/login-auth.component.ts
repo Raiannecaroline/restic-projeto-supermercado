@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, User } from '@auth0/auth0-angular';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-auth',
@@ -10,24 +10,35 @@ import { Observable } from 'rxjs';
 })
 export class LoginAuthComponent implements OnInit {
 
-  isHome: boolean = false;
   isLoggedIn: boolean = false;
-  isAuthenticated$: Observable<boolean>
+  //isAuthenticated$: Observable<boolean>
   profile!: User | null | undefined;
 
   constructor(
-    private auth: AuthService,
+    @Inject(DOCUMENT) public document: Document,
+    private authService: AuthService,
     private router: Router
-  ) {
-    this.isAuthenticated$ = this.auth.isAuthenticated$
-  }
+  ) {}
 
   ngOnInit(): void {
+    // Autualiza o estado do login do usuário
+    this.authService.isAuthenticated$.subscribe(isAuthenticated => {
+      this.isLoggedIn = isAuthenticated;
+      if (isAuthenticated) {
+        this.authService.user$.subscribe(user => {
+          this.profile = user;
+        });
+      }
+    });
   }
 
-  login() {
-    this.auth.loginWithRedirect();
-    console.log(this.auth)
+  login(): void {
+    this.authService.loginWithRedirect();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }
