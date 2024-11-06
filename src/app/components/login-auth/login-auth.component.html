@@ -1,0 +1,13 @@
+<header class="text-black-50 text-center note-paper">
+  <div class="container flex-column">
+    <h1 class="display-6">Seja Bem-Vindo ao Supermercadinho RESTIC</h1>
+    <div class="d-flex justify-content-center pt-4">
+      <button class="btn btn-secondary btn-lg" (click)="login()">
+        <i class="bi bi-box-arrow-in-right"></i> Login
+      </button>
+    </div>
+    <div *ngIf="isLoggedIn" class="alert alert-success mt-4" role="alert">
+      Login realizado com sucesso!
+    </div>
+  </div>
+</header>

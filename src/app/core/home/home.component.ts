@@ -1,4 +1,4 @@
-import { SupermercadoListaService } from './../../services/supermercado-lista.service';
+import { SupermercadoListaService } from '../../services/supermercado-lista/supermercado-lista.service';
 import { Component } from '@angular/core';
 import { SupermercadoItens } from 'src/app/models/supermercado-itens.model';
 
