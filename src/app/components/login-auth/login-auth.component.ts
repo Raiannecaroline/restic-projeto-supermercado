@@ -28,6 +28,7 @@ export class LoginAuthComponent implements OnInit {
         this.authService.user$.subscribe(user => {
           this.profile = user;
         });
+        this.router.navigate(['home']);
       }
     });
   }
